@@ -2,7 +2,9 @@ plugins {
     id 'org.springframework.boot' version '2.2.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'net.ltgt.apt' version '0.20'
 }
+apply plugin: 'net.ltgt.apt-idea'
 
 group = 'pl.krzysztofurban'
 version = '1.0-SNAPSHOT'
@@ -18,17 +20,29 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    mapstructVersion = "1.2.0.Final"
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-actuator'
     implementation(group: 'com.google.collections', name: 'google-collections', version: '1.0')
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+}
+
+compileJava {
+    options.annotationProcessorPath = configurations.annotationProcessor
+    options.compilerArgs << "-Amapstruct.defaultComponentModel=spring"
 }
 
 test {
