@@ -19,6 +19,6 @@ public class Author implements Serializable {
   private int age;
   private Set<Post> posts;
 
-  @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
+  @Embedded.Nullable
   private Address address;
 }
