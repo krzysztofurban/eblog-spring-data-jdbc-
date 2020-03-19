@@ -1,6 +1,7 @@
 package pl.krzysztofurban.eblogspringdatajdbc.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -21,4 +22,11 @@ public class Author implements Serializable {
 
   @Embedded.Nullable
   private Address address;
+
+  @Builder
+  public Author(Long id, String name, int age) {
+    this.id = id;
+    this.name = name;
+    this.age = age;
+  }
 }

@@ -1,5 +1,14 @@
 GET http://localhost:8201/eblog/authors
 
+###
+
+GET http://localhost:8201/eblog/authors/generic/findAll
+
+###
+
+GET http://localhost:8201/eblog/authors/generic/findById/2
+
+
 
 
 
