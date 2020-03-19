@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Embedded;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -17,4 +18,7 @@ public class Author implements Serializable {
   private String name;
   private int age;
   private Set<Post> posts;
+
+  @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
+  private Address address;
 }
