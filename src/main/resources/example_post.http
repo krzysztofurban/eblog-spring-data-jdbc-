@@ -17,6 +17,8 @@ Content-Type: application/json
   "age":"12"
 }
 
+###
+GET http://localhost:8201/eblog/author/minInfo/1
 
 
 

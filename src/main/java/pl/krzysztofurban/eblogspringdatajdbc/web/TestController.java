@@ -49,4 +49,9 @@ public class TestController {
     authorRepository.save(authorMapper.updateAuthorFromDto(authorDto, author));
     return authorMapper.toDto(authorRepository.findById(id).orElseThrow(AuthorNotFoundException::new));
   }
+
+  @GetMapping("/author/minInfo/{id}")
+  public Author findAuthorAndReturnMinInfo(@PathVariable Integer id) {
+    return authorRepository.findMinInfoById(id);
+  }
 }

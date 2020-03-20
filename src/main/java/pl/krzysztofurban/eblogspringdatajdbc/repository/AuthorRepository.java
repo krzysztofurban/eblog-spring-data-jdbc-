@@ -11,6 +11,9 @@ public interface AuthorRepository extends CrudRepository<Author, Long> {
   @Query("Select a.* from author a")
   List<Author> findAuthorsWithPosts();
 
+  @Query("Select a.id, a.name, a.age from author a where a.id = :id")
+  Author findMinInfoById(@Param("id") Integer id);
+
   @Query("Select * from author a where a.age = :age")
   List<Author> findByAge(@Param("age") Integer age);
 }
