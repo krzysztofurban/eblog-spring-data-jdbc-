@@ -1,4 +1,4 @@
-package pl.krzysztofurban.eblogspringdatajdbc.listener;
+package pl.krzysztofurban.eblogspringdatajdbc.callback;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
