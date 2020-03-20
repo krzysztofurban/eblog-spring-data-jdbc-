@@ -1,5 +1,6 @@
 package pl.krzysztofurban.eblogspringdatajdbc.repository;
 
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +17,8 @@ public interface AuthorRepository extends CrudRepository<Author, Long> {
 
   @Query("Select * from author a where a.age = :age")
   List<Author> findByAge(@Param("age") Integer age);
+
+  @Modifying
+  @Query("Update author set name = :name, age = :age where id = :id")
+  boolean updateAuthorNameAndAge(@Param("id") Long id, @Param("name") String name, @Param("age") Integer age);
 }

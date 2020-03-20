@@ -45,9 +45,12 @@ public class TestController {
   @PatchMapping("/authors/{id}")
   public AuthorDto genericSaveMethod(@PathVariable Long id, @RequestBody AuthorDto authorDto) {
     log.info("Updating author entity with id {}", id);
-    Author author = authorRepository.findById(id).orElseThrow(AuthorNotFoundException::new);
-    authorRepository.save(authorMapper.updateAuthorFromDto(authorDto, author));
-    return authorMapper.toDto(authorRepository.findById(id).orElseThrow(AuthorNotFoundException::new));
+    boolean result = authorRepository.updateAuthorNameAndAge(id, authorDto.getName(), authorDto.getAge());
+    if(result) {
+      return authorMapper.toDto(authorRepository.findById(id).orElseThrow(AuthorNotFoundException::new));
+    } else {
+      throw new AuthorNotFoundException();
+    }
   }
 
   @GetMapping("/author/minInfo/{id}")
